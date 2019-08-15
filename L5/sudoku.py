@@ -7,29 +7,49 @@ def printcell(cells):
         print("-" * 25)
 
 
-def check_col(cells):
-    for i in range(0, 5):
-        if cells[0][i] == cells[1][i] == cells[2][i]  == cells[3][i] == cells[4][i] == cells[5][i] != ' ':
-            return True
-    return False
-
-def check(cells):
-    if check_col(cells) or check_row(cells) or check_diagonal(cells):
+def checker1(col,row,num):
+        for i in range (0,6):
+          if num == cells[i][col] or num == cells[row][i] or cells[row][col] != ' ':
+            return False
+            break
         return True
-    return False
+          
+         
 
+def checker2(col,row,num):
+        if row%2 == 0:
+            q = row +1
+        else:
+            q = row -1
+        if 0<= col <= 2:
+            x = 0
+            y =3
+        else:
+            x = 3
+            y =6
+        for i in range (x,y):
+          if num == cells[q][i]:
+            return False
+            break
+        return True
+        
+          
+        
 
     
 
 cells = [[' ',' ','3',' ','1',' '], ['5','6',' ','3','2',' '], [' ','5','4','2',' ','3'], ['2',' ','6','4','5',' '], [' ','1','2',' ','4','5'], [' ','4',' ','1',' ',' ']]
 printcell(cells)
-
-while True:
-    col = int(input("Please enter column\n"))
+game = True
+while game:
     row = int(input("Please enter row\n"))
-    num = input("Please enter a number")
-    if cells[row][col] == ' ':
-        cells[row][col] = num
-        printcell(cells)
-    else:
-         print("It is taken already")
+    col = int(input("Please enter column\n"))
+    num = input("Please enter a number\n")  
+    if checker1(col,row,num) == checker2(col,row,num) == True:
+            cells[row][col] = num
+            printcell(cells)
+
+    if not ' ' in cells[0] and not ' ' in cells[1] and not ' ' in cells[2] and not ' ' in cells[3] and not ' ' in cells[4] and not ' ' in cells[5] :
+               game = False
+               print ("Done!")
+
