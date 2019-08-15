@@ -26,11 +26,36 @@ def check(cells):
 cells = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
 printcell(cells)
-while True:
-    col = int(input("Please enter column"))
-    row = int(input("Please enter row"))
+p = 0
+game = True
+while game:
+    col = int(input("Please enter column\n"))
+    row = int(input("Please enter row\n"))
     if cells[row][col] == ' ':
+        if p%2 == 0:
+          sym  = 'X'
+        else:
+          sym = 'O'
+        cells[row][col] = sym
+        printcell(cells)
+        p = p+1
+    else:
+         print("It is taken already")
+        
+
+        
+    for x in range (0,3): 
+      if (cells[x][0] == cells[x][1] == cells[x][2] == sym) or (cells[0][x] == cells[1][x] == cells[2][x] == sym) or (cells[0][0] == cells[1][1] == cells[2][2] == sym) or (cells[2][0] == cells[1][1] == cells[0][2] == sym):
+        print(sym, "wins!")
         break
-    print("It is taken already")
+        game = False
+        
+
+    if not ' ' in cells[0] and not ' ' in cells[1] and not ' ' in cells[2] :
+        print('Draw')
+        game = False
+     
+
+    
 
 
